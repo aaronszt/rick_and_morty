@@ -6,6 +6,7 @@ import Detail from './components/Detail/Detail';
 import Form from './components/Form/Form';
 import Favorites from './components/Favorites/Favorites';
 import axios from 'axios';
+import backGraund from "./image/backGraund.jpg";
 import { useEffect, useState } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 
@@ -13,6 +14,9 @@ import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 // const email = "aaron@gmail.com"
 // const password = "123asdd"
 const URL = 'http://localhost:3001/rickandmorty/login/';
+
+
+
 
 function App() {
    const location = useLocation();
@@ -32,6 +36,11 @@ function App() {
          alert('¡No hay personajes con este ID!');
       }
    };
+
+   // const handleRandom = () => {
+   //    const random = Math.floor(Math.random() * (626 - 1) + 1);
+   //    onSearch(random)
+   //  }
 
    const onClose = (id) => {
       const characterFiltered = characters.filter(characters => characters.id !== id)
@@ -56,7 +65,16 @@ function App() {
       !access && navigate("/")
    }, [access])
 
+   const backgroundStyles = {
+      backgroundImage: `url(${backGraund})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      height: '150vh', // Establece el alto de la página al 100% del viewport
+    };
+   
    return (
+      
       <div className='App'>
          {
             location.pathname !== "/" && <Nav onSearch = {onSearch}/>
@@ -76,7 +94,6 @@ function App() {
             <Route path='/favorites' element = {<Favorites/>}/>
 
          </Routes>
-
       </div>
    );
 }
